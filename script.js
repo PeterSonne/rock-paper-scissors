@@ -4,6 +4,7 @@ const choiceValues = {
   paper: 2,
   scissors: 3
 };
+let resetTimeout = null;
 
 //routines
 const reset = () => {
@@ -32,13 +33,14 @@ const playGame = playerChoice => {
     responseToPlayer = "You WIN! :)";
   }
   document.querySelector("#outcome").innerHTML = responseToPlayer;
-  setTimeout(() => {
+  resetTimeout = setTimeout(() => {
     reset();
     document.activeElement.blur();
   }, 1500);
 };
 
 const play = playerChoice => {
+  clearTimeout(resetTimeout);
   reset();
   setTimeout(playGame, 500, playerChoice);
 };
