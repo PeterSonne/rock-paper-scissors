@@ -18,9 +18,10 @@ const playGame = playerChoice => {
   const compChoice = Object.keys(choiceValues).find(
     e => choiceValues[e] == rand
   );
-
+  //show computer players choice
   document.querySelector("#opponent #" + compChoice).classList.remove("hidden");
 
+  // you always lose - but...
   let responseToPlayer = "You lose :(";
   // decision?
   if (compChoice == playerChoice) {
@@ -32,7 +33,9 @@ const playGame = playerChoice => {
   ) {
     responseToPlayer = "You WIN! :)";
   }
+  // show result
   document.querySelector("#outcome").innerHTML = responseToPlayer;
+  // after 1.5 reset the whole page
   resetTimeout = setTimeout(() => {
     reset();
     document.activeElement.blur();
@@ -40,7 +43,10 @@ const playGame = playerChoice => {
 };
 
 const play = playerChoice => {
+  // first clear Timeout for resets - otherwise might be triggered after new game started
   clearTimeout(resetTimeout);
+  // reset in case not yet happened
   reset();
+  // wait for animation and then play
   setTimeout(playGame, 500, playerChoice);
 };
